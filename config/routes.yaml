@@ -1,7 +1,7 @@
-controllers:
-    resource: ../src/Controller/
+externalArticlesControllers:
+    resource: ../src/UI/Http/Rest/Controller/
     type: annotation
 
 kernel:
-    resource: ../src/Kernel.php
+    resource: ../src/App/Kernel.php
     type: annotation

@@ -11,14 +11,14 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
-    App\:
-        resource: '../src/'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
+    App\ExternalContent\Article\Application\Query\Article\Find10RecentArticles\Find10RecentArticlesHandler:
+        tags: [messenger.message_handler]
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\ExternalContent\Article\Application\Service\NYTService\NYTApiProxyService:
+        arguments:
+            $apiKey: '%env(NY_TIMES_API_KEY)%'
+            $apiUrl: '%env(NY_TIMES_API_URL)%'
+
+    UI\Http\Rest\Controller\:
+        resource: '../src/UI/Http/Rest/Controller/*'
+        tags: [ 'controller.service_arguments' ]

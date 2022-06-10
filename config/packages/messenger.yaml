@@ -1,0 +1,6 @@
+framework:
+    messenger:
+        transports:
+             sync: 'sync://'
+        routing:
+             App\ExternalContent\Article\Application\Query\Article\Find10RecentArticles\Find10RecentArticlesQuery: sync
