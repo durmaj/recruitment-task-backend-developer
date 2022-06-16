@@ -11,13 +11,15 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    App\ExternalContent\Article\Application\Query\Article\Find10RecentArticles\Find10RecentArticlesHandler:
-        tags: [messenger.message_handler]
+    App\:
+        resource: '../src/App/*'
+        exclude: '../src/App/**/{Migrations,EventSubscriber}'
+    UI\:
+        resource: '../src/UI/*'
+        exclude: '../src/UI/**/{EventSubscriber}'
 
-    App\ExternalContent\Article\Application\Service\NYTService\NYTApiProxyService:
-        arguments:
-            $apiKey: '%env(NY_TIMES_API_KEY)%'
-            $apiUrl: '%env(NY_TIMES_API_URL)%'
+    App\ExternalContent\Article\Application\Query\Article\FindRecentArticles\FindRecentArticlesHandler:
+        tags: [messenger.message_handler]
 
     UI\Http\Rest\Controller\:
         resource: '../src/UI/Http/Rest/Controller/*'
